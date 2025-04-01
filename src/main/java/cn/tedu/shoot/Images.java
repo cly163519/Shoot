@@ -10,6 +10,9 @@ public class Images {
     public static BufferedImage[] bairs;
     public static BufferedImage[] bees;
     static{//initialize pictures
+        sky = readImage("background.png");
+        bullet = readImage("bullet.png");
+        heros = new BufferedImage[2];
 
     }
 
