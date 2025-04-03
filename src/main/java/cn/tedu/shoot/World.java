@@ -29,7 +29,7 @@ public class World extends JPanel{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(WIDTH,HEIGHT);
         frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        frame.setVisible(true);//Call paint()
 
         //world.action();
     }

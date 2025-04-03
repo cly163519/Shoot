@@ -1,8 +1,15 @@
 package cn.tedu.shoot;
 
 import java.util.Random;
+import java.awt.image.BufferedImage;
 
-public class FlyingObject {
+public abstract class FlyingObject {
+    public static final int LIVE = 0;
+    public static final int DEAD = 1;
+    public static final int REMOVE = 2;
+    protected int state = LIVE;
+
+
     protected int width;
     protected int height;
     protected int x;
@@ -22,5 +29,16 @@ public class FlyingObject {
         this.x = x;
         this.y = y;
     }
+    public abstract BufferedImage getImage();
 
+    /*Determine whether the object is alive*/
+    public boolean isLive(){
+        return state == LIVE;
+    }
+    public boolean isDead(){
+        return state == DEAD;
+    }
+    public boolean isRemove(){
+        return state == REMOVE;
+    }
 }
