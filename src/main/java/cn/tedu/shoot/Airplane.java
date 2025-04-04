@@ -11,10 +11,10 @@ public class Airplane extends FlyingObject {
     private int index = 1;//Bom pictures index from 1
     public BufferedImage getImage(){
         if (isLive()) {
-            return Images.bees[0];
+            return Images.airs[0];
         }else if(isDead()){
-            BufferedImage img = Images.bees[index++];
-            if(index==Images.bees.length){
+            BufferedImage img = Images.airs[index++];
+            if(index==Images.airs.length){
                 state = REMOVE;
             }
             return img;

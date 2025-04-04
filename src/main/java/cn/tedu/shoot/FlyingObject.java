@@ -15,6 +15,8 @@ public abstract class FlyingObject {
     protected int x;
     protected int y;
     //Provided for Airplane,BigAirplane,Bee
+    // The three types of enemies have different widths and heights, so parameters are required.
+    // Since the x/y coordinates are the same, no parameters are needed.
     public FlyingObject(int width,int height){
         this.width = width;
         this.height = height;
@@ -23,6 +25,7 @@ public abstract class FlyingObject {
         y = -height;
     }
     //Provided for Hero, Sky, Bullet
+    //Hero,Sky and Bullet have different width, height, x and y, so parameters are required.
     public FlyingObject(int width, int height, int x,int y){
         this.width = width;
         this.height = height;
@@ -31,7 +34,7 @@ public abstract class FlyingObject {
     }
     public abstract BufferedImage getImage();
 
-    /*Determine whether the object is alive*/
+    //Determine whether the object is alive
     public boolean isLive(){
         return state == LIVE;
     }
