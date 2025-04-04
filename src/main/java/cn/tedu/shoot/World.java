@@ -2,6 +2,7 @@ package cn.tedu.shoot;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
+import java.io.InputStream;
 
 public class World extends JPanel{
     public static final int WIDTH = 400;
@@ -19,6 +20,8 @@ public class World extends JPanel{
     };
 
     public void paint(Graphics g){
+        g.drawImage(sky.getImage(),sky.x,sky.y,null);
+        g.drawImage(sky.getImage(),sky.x,sky.getY1(),null);
 
     }
 
@@ -33,4 +36,6 @@ public class World extends JPanel{
 
         //world.action();
     }
+
+
 }

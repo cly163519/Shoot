@@ -12,6 +12,8 @@ public class Sky extends FlyingObject{
     }
     public BufferedImage getImage(){
         return Images.sky;
-
+    }
+    public int getY1(){
+        return y1;
     }
 }
