@@ -2,7 +2,10 @@ package cn.tedu.shoot;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
-import java.io.InputStream;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.Arrays;
 
 public class World extends JPanel{
     public static final int WIDTH = 400;
@@ -11,14 +14,44 @@ public class World extends JPanel{
     //Represents the object displayed in the window
     private Sky sky = new Sky();//Sky Object
     private Hero hero = new Hero();//Hero Object
-    private FlyingObject[] enemies = {//Contains Airplane,BigAirplane,Bee
-            new Airplane(),
-            new BigAirplane(),
-            new Bee()
-    };
-    private Bullet[] bullets = {//Bullet Array
-            new Bullet(100,200)
-    };
+    private FlyingObject[] enemies = {};//Contains Airplane,BigAirplane,Bee
+    private Bullet[] bullets = {};//Bullet Array
+
+    //Generate enemies objects
+    public FlyingObject nextOne(){
+        Random rand = new Random();
+        int type = rand.nextInt(20);//A random number between 0 and 19
+        if(type<5){ //Between 0-4,return Bee object
+            return new Bee();
+        }else if(type<13){ //Between 5-12,return Airplane object
+            return new Airplane();
+        }else{ //Between 13-19, return BigAirplane
+            return new BigAirplane();
+        }
+    }
+
+    private int enterIndex = 0;//Enemy entry counter
+    //Enemies(Airplane/BigAirplane/Bee) enter
+    public void enterAction(){ //Every 10 milliseconds
+        enterIndex++; // Increases every 10 milliseconds
+        if(enterIndex%40==0){ //Executes every 400 milliseconds
+            FlyingObject obj = nextOne();//Get enemy objects
+            enemies = Arrays.copyOf(enemies,enemies.length+1);//Expanding the array
+            enemies[enemies.length-1] = obj;// Adding obj to the last element of the enemy array
+        }
+    }
+
+    //Start program execution
+    public void action(){
+        Timer timer = new Timer();//Timer object
+        int intervel = 10;//Timed interval(In milliseconds)
+        timer.schedule(new TimerTask(){
+            public void run(){//What the timer does (every 10 milliseconds)
+                enterAction();//Enemies enter;
+                repaint();//Reinvoke paint
+            }
+        },intervel,intervel);//Schedule
+    }
 
     public void paint(Graphics g){//Draw pictures in the window
         g.drawImage(sky.getImage(),sky.x,sky.y,null);
@@ -43,7 +76,7 @@ public class World extends JPanel{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);//Call paint()
 
-        //world.action();
+        world.action();//Call action(), Start program execution
     }
 
 
