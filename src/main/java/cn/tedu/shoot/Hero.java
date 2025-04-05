@@ -14,4 +14,15 @@ public class Hero extends FlyingObject{
     public BufferedImage getImage(){
         return Images.heros[index++%2];
     }
+    // The hero aircraft fires bullets, i.e., creates bullet objects
+    public Bullet[] shoot(){
+        if(fire>0){//Double fire
+            Bullet[] bs = new Bullet[2];//Creates an array with 2 bullets
+            bs[0] = new Bullet[];
+            return bs;
+        }else{ //Single fire
+            Bullet[] bs = new Bullet[1];//Creates an array with 1 bullets
+            return bs;
+        }
+    }
 }
