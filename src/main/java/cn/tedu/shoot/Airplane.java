@@ -17,9 +17,9 @@ public class Airplane extends FlyingObject {
             if(index==Images.airs.length){
                 state = REMOVE;
             }
-            return img;
+            return img;//Return bom.png
         }
-        return null;
+        return null;//Do not return image when in deleted state
     }
 
     //Rewrite flying object movement

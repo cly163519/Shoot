@@ -51,4 +51,16 @@ public abstract class FlyingObject {
     public boolean isOutOfBounds(){
         return y>=World.HEIGHT;//If the enemy's y >= window height, it is out of bounds.
     }
+
+    //Detecting Collisions/Assume `this` represents the enemy, and `other` represents either a Bullet or the Hero.
+    public boolean isHit(FlyingObject other){
+        int x1 = this.x - other.width;//x1=Enemies' x-bullets/Hero's width
+        int x2 = this.x + this.width;//x2=Enemies' x+Enemies' width
+        int y1 = this.y - other.height;//y1=Enemies' y-bullets/Hero's height
+        int y2 = this.y + this.height;//y2=Enemies' y+Enemies' height
+        int x = other.x;//x:Bullets/Hero's x
+        int y = other.y;//y:Bullets/Hero's y
+
+        return (x>=x1 && x<=x2) && (y>=y1 && y<=y2);//x is between x1 and x2,y is between y1 and y2
+    }
 }
