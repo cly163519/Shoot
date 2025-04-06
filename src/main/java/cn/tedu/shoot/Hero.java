@@ -30,4 +30,15 @@ public class Hero extends FlyingObject{
             return bs;
         }
     }
+
+    //Rewrite flying object movement
+    public void step(){
+
+    }
+    //Hero's movement.x, y represent the x and y coordinates of the mouse
+    public void moveTo(int x,int y){ //mouse's x/y
+        this.x = x - this.width/2; //Hero's x=mouse's x-1/2 Hero's width
+        this.y = y - this.height/2;//Hero's y=mouse's y-1/2 Hero's height
+    }
+
 }

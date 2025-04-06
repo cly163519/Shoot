@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Arrays;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class World extends JPanel{
     public static final int WIDTH = 400;
@@ -52,14 +54,37 @@ public class World extends JPanel{
         }
     }
 
+    //Flying object movement
+    public void stepAction(){//Every 10 milliseconds
+        sky.step(); //Flying object on the move.
+        for(int i=0;i<enemies.length;i++){ //Traverse all enemies
+            enemies[i].step();//Enemies move.
+        }
+        for(int i=0;i<bullets.length;i++){ //Traverse all bullets
+            bullets[i].step(); //Bullets move.
+        }
+    }
+
     //Start program execution
     public void action(){
+        MouseAdapter m = new MouseAdapter(){
+            @Override//Rewrite mouseMoved() method
+            public void mouseMoved(MouseEvent e){
+                int x = e.getX();//Get the x-coordinate of the mouse
+                int y = e.getY();//Get the y-coordinate of the mouse
+                hero.moveTo(x,y);//Hero's movement
+            }
+        };//Mouse Listener
+        this.addMouseListener(m);//Install listener
+        this.addMouseMotionListener(m);//Install listener
+
         Timer timer = new Timer();//Timer object
         int intervel = 10;//Timed interval(In milliseconds)
         timer.schedule(new TimerTask(){
             public void run(){//What the timer does (every 10 milliseconds)
-                enterAction();//Enemies(Airplande/BigAirplane/Bee) enter;
+                enterAction();//Enemies(Airplane/BigAirplane/Bee) enter;
                 shootAction();//Bullet entry;
+                stepAction();//FlyingObject movement
                 repaint();//Reinvoke paint
             }
         },intervel,intervel);//Schedule

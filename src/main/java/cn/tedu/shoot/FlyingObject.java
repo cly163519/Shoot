@@ -22,7 +22,7 @@ public abstract class FlyingObject {
         this.height = height;
         Random rand = new Random();
         x = rand.nextInt(World.WIDTH-width);
-        y = height;
+        y = -height;
     }
     //Provided for Hero, Sky, Bullet
     //Hero,Sky and Bullet have different width, height, x and y, so parameters are required.
@@ -44,4 +44,8 @@ public abstract class FlyingObject {
     public boolean isRemove(){
         return state == REMOVE;
     }
+
+    //FlyingObject movement
+    public abstract void step();
+
 }
