@@ -27,4 +27,14 @@ public class Bee extends FlyingObject{
         }
         return null;
     }
+
+    //Rewrite flying object movement
+    public void step(){
+        x += xSpeed;//x+ means left or right
+        y += ySpeed;//y+ means downwards
+        if (x <= 0 || x >= World.WIDTH - width) {//If the x-coordinate is less than 0, or greater than the width of the window width-bee's width, move in the opposite direction
+            xSpeed *= -1;//Toggle direction, positive to negative, negative to positive
+        }
+    }
+
 }

@@ -21,4 +21,10 @@ public class Airplane extends FlyingObject {
         }
         return null;
     }
+
+    //Rewrite flying object movement
+    public void step(){
+        y += speed;//y+ means downward
+    }
+
 }

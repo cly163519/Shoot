@@ -17,4 +17,15 @@ public class Bullet extends FlyingObject{
        }
            return null;
        }
+
+    //Rewrite flying object movement
+    public void step(){
+        y -= speed;//y- means upward
+    }
+
+    //Rewrite isOutOfBounds(), and Detect if bullets have crossed the border
+    public boolean isOutOfBounds(){
+        return y<=-height;//If bullet's y <= -bullet's height, it is out of bounds.
+    }
+
 }
