@@ -48,7 +48,7 @@ public class World extends JPanel{
         if(shootIndex%30 == 0){//Goes every 300 milliseconds
             Bullet[] bs = hero.shoot();//Get an array of bullets fired by the Hero
             bullets = Arrays.copyOf(bullets,bullets.length+bs.length);//Expanding the Bullet Array.Expand the capacity by as many elements as there are in the bs.
-
+            System.arraycopy(bs,0,bullets,bullets.length-bs.length,bs.length);//Appending of arrays
         }
     }
 
