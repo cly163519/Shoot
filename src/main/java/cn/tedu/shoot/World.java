@@ -41,13 +41,25 @@ public class World extends JPanel{
         }
     }
 
+    private int shootIndex = 0;//Bullet entry counter
+    //Bullets entry
+    public void shootAction(){
+        shootIndex++;//Increase by 1 every 10 milliseconds
+        if(shootIndex%30 == 0){//Goes every 300 milliseconds
+            Bullet[] bs = hero.shoot();//Get an array of bullets fired by the Hero
+            bullets = Arrays.copyOf(bullets,bullets.length+bs.length);//Expanding the Bullet Array.Expand the capacity by as many elements as there are in the bs.
+
+        }
+    }
+
     //Start program execution
     public void action(){
         Timer timer = new Timer();//Timer object
         int intervel = 10;//Timed interval(In milliseconds)
         timer.schedule(new TimerTask(){
             public void run(){//What the timer does (every 10 milliseconds)
-                enterAction();//Enemies enter;
+                enterAction();//Enemies(Airplande/BigAirplane/Bee) enter;
+                shootAction();//Bullet entry;
                 repaint();//Reinvoke paint
             }
         },intervel,intervel);//Schedule
