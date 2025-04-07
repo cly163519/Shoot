@@ -3,7 +3,7 @@ package cn.tedu.shoot;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class BigAirplane extends FlyingObject {
+public class BigAirplane extends FlyingObject implements EnemyScore{
     private int speed;
     public BigAirplane(){
         super(66,89);
@@ -26,5 +26,9 @@ public class BigAirplane extends FlyingObject {
     //Rewrite flying object movement
     public void step(){
         y += speed;//y+ means downward
+    }
+
+    public int getScore(){
+        return 3; //Destroying a BigAirplane gives the player 3 points
     }
 }
