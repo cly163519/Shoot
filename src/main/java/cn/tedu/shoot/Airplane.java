@@ -25,8 +25,6 @@ public class Airplane extends FlyingObject implements EnemyScore{
     //Rewrite flying object movement
     public void step(){
         y += speed;//y+ means downward
-
-
     }
 
     public int getScore(){

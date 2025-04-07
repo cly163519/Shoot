@@ -3,7 +3,7 @@ package cn.tedu.shoot;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class Bee extends FlyingObject{
+public class Bee extends FlyingObject implements EnemyAward{
     private int xSpeed;
     private int ySpeed;
     private int awardType;
@@ -36,6 +36,8 @@ public class Bee extends FlyingObject{
             xSpeed *= -1;//Toggle direction, positive to negative, negative to positive
         }
     }
-
-
+        //Rewrite getAwardType()
+        public int getAwardType(){
+            return awardType;
+    }
 }

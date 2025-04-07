@@ -81,6 +81,20 @@ public class World extends JPanel{
         }
     }
 
+    //Bullet collision with the enemy
+    public void bulletBangAction(){ //Every 10 milliseconds
+        for(int i=0;i<bullets.length;i++){ //Traverse all bullets
+            Bullet b = bullets[i]; //Get every bullet
+            for(int j=0;j<enemies.length;j++){//Travers all enemies
+                FlyingObject f = enemies[j];//Get every enemy
+                if(b.isLive() && f.isLive() && f.isHit(b)){//All Flying Objects are alive and collide
+                    b.goDead();
+                    f.goDead();
+                }
+            }
+        }
+    }
+
     //Start program execution
     public void action(){
         MouseAdapter m = new MouseAdapter(){
@@ -102,6 +116,7 @@ public class World extends JPanel{
                 shootAction();//Bullet entry;
                 stepAction();//FlyingObject movement
                 outOfBoundsAction();//Deletion of cross-border enemies and bullets
+                bulletBangAction();//Bullet collision with the enemy
                 repaint();//Reinvoke paint
             }
         },intervel,intervel);//Schedule

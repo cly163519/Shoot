@@ -41,4 +41,14 @@ public class Hero extends FlyingObject{
         this.y = y - this.height/2;//Hero's y=mouse's y-1/2 Hero's height
     }
 
+    //Increase hero's firepower
+    public void addFire(){
+        fire += 40; //Add 40 firepower
+    }
+
+    //Increase hero's life
+    public void addLife(){
+        life++;//Add 1 life
+    }
+
 }

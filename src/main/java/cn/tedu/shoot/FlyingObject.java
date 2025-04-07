@@ -63,4 +63,9 @@ public abstract class FlyingObject {
 
         return (x>=x1 && x<=x2) && (y>=y1 && y<=y2);//x is between x1 and x2,y is between y1 and y2
     }
+
+    //FlyingObject go dead
+    public void goDead(){
+        state = DEAD;//Change the object's state to dead
+    }
 }
