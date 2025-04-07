@@ -67,20 +67,21 @@ public class World extends JPanel{
 
     //Deletion of cross-border enemies and bullets
     public void outOfBoundsAction(){
-        for(int i=0;i<enemies.length;i++){//Traverse all enemies
-            if(enemies[i].isOutOfBounds()){ //Enemies are out of bounds
+        for(int i=0;i<enemies.length;i++){ //Traverse all enemies
+            if(enemies[i].isOutOfBounds() || enemies[i].isRemove()){ //Enemies are out of bounds
                 enemies[i] = enemies[enemies.length-1];//Replace the out-of-bounds enemy with the last element of the enemies array.
                 enemies = Arrays.copyOf(enemies,enemies.length-1);//Reduce the array's size
             }
         }
         for(int i=0;i<bullets.length;i++){ //Travers all bullets
-            if(bullets[i].isOutOfBounds()){ //Bullet is out of bounds.
+            if(bullets[i].isOutOfBounds() || bullets[i].isRemove()){ //Bullet is out of bounds.
                 bullets[i] = bullets[bullets.length-1];
                 bullets = Arrays.copyOf(bullets,bullets.length-1);
             }
         }
     }
 
+    private int score = 0;//Player's scores
     //Bullet collision with the enemy
     public void bulletBangAction(){ //Every 10 milliseconds
         for(int i=0;i<bullets.length;i++){ //Traverse all bullets
@@ -88,8 +89,24 @@ public class World extends JPanel{
             for(int j=0;j<enemies.length;j++){//Travers all enemies
                 FlyingObject f = enemies[j];//Get every enemy
                 if(b.isLive() && f.isLive() && f.isHit(b)){//All Flying Objects are alive and collide
-                    b.goDead();
-                    f.goDead();
+                    b.goDead();//Bullets go dead
+                    f.goDead();//Flying objects go dead
+                    if(f instanceof EnemyScore){//If the collided object can earn points--All classes that implement EnemyScore
+                        EnemyScore es = (EnemyScore)f;// Cast the collided object to the EnemyScore interface
+                        score += es.getScore();//Player get scores
+                    }
+                    if(f instanceof EnemyAward){//If the collided object can get rewards--All classes that implement EnemyAward
+                        EnemyAward ea = (EnemyAward)f;//Cast the collided object to the EnemyAward
+                        int type = ea.getAwardType();//Get AwardType
+                        switch(type){ // Get different types of rewards
+                            case EnemyAward.FIRE:
+                                hero.addFire();
+                                break;
+                            case EnemyAward.LIFE:
+                                hero.addLife();
+                                break;
+                        }
+                    }
                 }
             }
         }
