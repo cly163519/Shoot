@@ -113,6 +113,18 @@ public class World extends JPanel{
         }
     }
 
+    //Hero collision with the enemy
+    public void heroBangAction(){
+        for(int i=0;i<enemies.length;i++){
+            FlyingObject f = enemies[i];
+            if(hero.isLive() && f.isLive() && f.isHit(hero)){
+                f.goDead();
+                hero.subtractLife();
+                hero.clearFire();
+            }
+        }
+    }
+
     //Start program execution
     public void action(){
         MouseAdapter m = new MouseAdapter(){
@@ -135,6 +147,7 @@ public class World extends JPanel{
                 stepAction();//FlyingObject movement
                 outOfBoundsAction();//Deletion of cross-border enemies and bullets
                 bulletBangAction();//Bullet collision with the enemy
+                heroBangAction();//Hero collision with the enemy
                 repaint();//Reinvoke paint
             }
         },intervel,intervel);//Schedule

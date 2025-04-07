@@ -56,4 +56,12 @@ public class Hero extends FlyingObject{
         return life;//Return the number of lives of the hero
     }
 
+    //Reduce Hero's life
+    public void subtractLife(){
+        life--;
+    }
+    //Clear Hero's firepower value
+    public void clearFire(){
+        fire=0;
+    }
 }
