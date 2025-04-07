@@ -82,6 +82,7 @@ public class World extends JPanel{
     }
 
     private int score = 0;//Player's scores
+    //Game collision detection and handling logic, involving interactions between multiple objects
     //Bullet collision with the enemy
     public void bulletBangAction(){ //Every 10 milliseconds
         for(int i=0;i<bullets.length;i++){ //Traverse all bullets
@@ -151,6 +152,8 @@ public class World extends JPanel{
             Bullet b = bullets[i];//Get every bullet
             g.drawImage(b.getImage(),b.x,b.y,null);//Draw bullet
         }
+        g.drawString("SCORE:"+score,10,25);
+        g.drawString("LIFE:"+hero.getLife(),10,45);
     }
 
     public static void main(String[] args){

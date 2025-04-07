@@ -51,4 +51,9 @@ public class Hero extends FlyingObject{
         life++;//Add 1 life
     }
 
+    //Get Hero's life
+    public int getLife(){
+        return life;//Return the number of lives of the hero
+    }
+
 }
