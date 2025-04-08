@@ -125,6 +125,13 @@ public class World extends JPanel{
         }
     }
 
+    //Check if the game is over
+    public void checkGameOverAction(){
+        if(hero.getLife()<=0){ //If Hero's life<=0,game is over
+
+        }
+    }
+
     //Start program execution
     public void action(){
         MouseAdapter m = new MouseAdapter(){
@@ -148,6 +155,7 @@ public class World extends JPanel{
                 outOfBoundsAction();//Deletion of cross-border enemies and bullets
                 bulletBangAction();//Bullet collision with the enemy
                 heroBangAction();//Hero collision with the enemy
+                checkGameOverAction();// Checks whether the game has ended based on the game rules or conditions
                 repaint();//Reinvoke paint
             }
         },intervel,intervel);//Schedule
