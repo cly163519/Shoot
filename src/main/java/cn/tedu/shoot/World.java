@@ -134,18 +134,32 @@ public class World extends JPanel{
     //Check if the game is over
     public void checkGameOverAction(){
         if(hero.getLife()<=0){ //If Hero's life<=0,game is over
-
+            state = GAME_OVER;
         }
     }
 
     //Start program execution
     public void action(){
         MouseAdapter m = new MouseAdapter(){
-            @Override//Rewrite mouseMoved() method
+            @Override
+            //Rewrite mouseMoved() method
             public void mouseMoved(MouseEvent e){
-                int x = e.getX();//Get the x-coordinate of the mouse
-                int y = e.getY();//Get the y-coordinate of the mouse
-                hero.moveTo(x,y);//Hero's movement
+                if(state==RUNNING){// Execute only when in running state
+                    int x = e.getX();//Get the x-coordinate of the mouse
+                    int y = e.getY();//Get the y-coordinate of the mouse
+                    hero.moveTo(x,y);//Hero's movement
+                }
+            }
+            //Rewrite mouseClicked() method
+            public void mouseClicked(MouseEvent e){
+                switch(state){
+                    case START:
+                        state = RUNNING;
+                        break;
+                    case GAME_OVER:
+                        state = START;
+                        break;
+                }
             }
         };//Mouse Listener
         this.addMouseListener(m);//Install listener
@@ -155,7 +169,7 @@ public class World extends JPanel{
         int intervel = 10;//Timed interval(In milliseconds)
         timer.schedule(new TimerTask(){
             public void run(){//What the timer does (every 10 milliseconds)
-                if(state==RUNNING){
+                if(state==RUNNING){// Execute only when in running state
                     enterAction();//Enemies(Airplane/BigAirplane/Bee) enter;
                     shootAction();//Bullet entry;
                     stepAction();//FlyingObject movement
@@ -190,8 +204,10 @@ public class World extends JPanel{
                 break;
             case PAUSE:
                 g.drawImage(Images.pause,0,0,null);
+                break;
             case GAME_OVER:
                 g.drawImage(Images.gameover,0,0,null);
+                break;
         }
 
     }
