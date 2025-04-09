@@ -10,8 +10,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class World extends JPanel{
-    public static final int WIDTH = 400;
-    public static final int HEIGHT = 700;
+    public static final int WIDTH = 400;//The window's width
+    public static final int HEIGHT = 700;//The window's height
+
+    public static final int START = 0;//Start up state
+    public static final int RUNNING = 1;//Running state
+    public static final int PAUSE = 2;//Pausing state
+    public static final int GAME_OVER = 3;//Game is over
+    private int state = START;//Default state
 
     //Represents the object displayed in the window
     private Sky sky = new Sky();//Sky Object
@@ -149,13 +155,15 @@ public class World extends JPanel{
         int intervel = 10;//Timed interval(In milliseconds)
         timer.schedule(new TimerTask(){
             public void run(){//What the timer does (every 10 milliseconds)
-                enterAction();//Enemies(Airplane/BigAirplane/Bee) enter;
-                shootAction();//Bullet entry;
-                stepAction();//FlyingObject movement
-                outOfBoundsAction();//Deletion of cross-border enemies and bullets
-                bulletBangAction();//Bullet collision with the enemy
-                heroBangAction();//Hero collision with the enemy
-                checkGameOverAction();// Checks whether the game has ended based on the game rules or conditions
+                if(state==RUNNING){
+                    enterAction();//Enemies(Airplane/BigAirplane/Bee) enter;
+                    shootAction();//Bullet entry;
+                    stepAction();//FlyingObject movement
+                    outOfBoundsAction();//Deletion of cross-border enemies and bullets
+                    bulletBangAction();//Bullet collision with the enemy
+                    heroBangAction();//Hero collision with the enemy
+                    checkGameOverAction();// Checks whether the game has ended based on the game rules or conditions
+                }
                 repaint();//Reinvoke paint
             }
         },intervel,intervel);//Schedule
@@ -175,6 +183,17 @@ public class World extends JPanel{
         }
         g.drawString("SCORE:"+score,10,25);
         g.drawString("LIFE:"+hero.getLife(),10,45);
+
+        switch(state){// Draw different pictures based on the current game state
+            case START:
+                g.drawImage(Images.start,0,0,null);
+                break;
+            case PAUSE:
+                g.drawImage(Images.pause,0,0,null);
+            case GAME_OVER:
+                g.drawImage(Images.gameover,0,0,null);
+        }
+
     }
 
     public static void main(String[] args){

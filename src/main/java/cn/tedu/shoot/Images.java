@@ -5,13 +5,21 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Images {
-    public static BufferedImage sky;
-    public static BufferedImage bullet;
-    public static BufferedImage[] heros;
-    public static BufferedImage[] airs;
-    public static BufferedImage[] bairs;
-    public static BufferedImage[] bees;
+    public static BufferedImage sky;//Sky picture
+    public static BufferedImage bullet;//Bullet picture
+    public static BufferedImage[] heros;//Hero pictures array
+    public static BufferedImage[] airs;//Airplane pictures array
+    public static BufferedImage[] bairs;//BigAirplane pictures array
+    public static BufferedImage[] bees;//Bee pictures array
+    public static BufferedImage start;//Startup picture
+    public static BufferedImage pause;//Pause picture
+    public static BufferedImage gameover;//Game is over
+
     static{  //initialize pictures
+        start = readImage("start.png");
+        pause = readImage("pause.png");
+        gameover = readImage("gameover.png");
+
         sky = readImage("background.png");
         bullet = readImage("bullet.png");
         heros = new BufferedImage[2];
