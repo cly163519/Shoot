@@ -157,11 +157,29 @@ public class World extends JPanel{
                         state = RUNNING;
                         break;
                     case GAME_OVER:
+                        score = 0;
+                        sky = new Sky();
+                        hero = new Hero();
+                        enemies = new FlyingObject[0];
+                        bullets = new Bullet[0];
                         state = START;
                         break;
                 }
             }
+            //Rewrite mouseExited() method
+            public void mouseExited(MouseEvent e){
+                if(state==RUNNING){
+                    state = PAUSE;
+                }
+            }
+            //Rewrite mouseEntered() method
+            public void mouseEntered(MouseEvent e){
+                if(state==PAUSE){
+                    state = RUNNING;
+                }
+            }
         };//Mouse Listener
+
         this.addMouseListener(m);//Install listener
         this.addMouseMotionListener(m);//Install listener
 
